@@ -23,9 +23,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'recorder_node = learning_mode.recorder_node:main',
-            'bag_player = learning_mode.bag_player:main',
-            'simple_planner = learning_mode.simple_planner:main',
+            'recorder_node = teaching_nav.recorder_node:main',
+            'bag_player = teaching_nav.bag_player:main',
+            'simple_planner = teaching_nav.simple_planner:main',
         ],
     },
 )

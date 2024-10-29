@@ -7,23 +7,23 @@ import os
 
 def generate_launch_description():
     # Path to your original localization launch file
-    hdl_localization_launch_path = os.path.join(
-        get_package_share_directory('hdl_global_localization'),
-        'launch',
-        'hdl_global_localization.launch'
-    )
+    # hdl_localization_launch_path = os.path.join(
+    #     get_package_share_directory('hdl_global_localization'),
+    #     'launch',
+    #     'hdl_global_localization.launch'
+    # )
     
     return LaunchDescription([
         # Include the localization launch file
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(hdl_localization_launch_path),
-            launch_arguments={
-                'points_topic': '/unilidar/cloud',
-                'use_imu': 'true',
-                'imu_topic': '/unilidar/imu',
-                'odom_child_frame_id': 'unilidar_lidar'
-            }.items()
-        ),
+        # IncludeLaunchDescription(
+        #     PythonLaunchDescriptionSource(hdl_localization_launch_path),
+        #     launch_arguments={
+        #         'points_topic': '/unilidar/cloud',
+        #         'use_imu': 'true',
+        #         'imu_topic': '/unilidar/imu',
+        #         'odom_child_frame_id': 'unilidar_lidar'
+        #     }.items()
+        # ),
         
         # Launch the recording node for pose data
         Node(
