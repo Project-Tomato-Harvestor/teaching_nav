@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'learning_mode'
+package_name = 'teaching_nav'
 
 setup(
     name=package_name,
