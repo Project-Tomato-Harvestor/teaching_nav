@@ -11,11 +11,11 @@ class SimplePlanner(Node):
         super().__init__('simple_planner')
 
         # Subscribe to desired pose (from replayed rosbag) and localization data
-        self.create_subscription(PoseStamped, '/replayed_odom', self.desired_pose_callback, 10)
+        self.create_subscription(Odometry, '/replayed_odom', self.desired_pose_callback, 10)
         self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
 
         # Publisher for velocity commands
-        self.cmd_vel_publisher = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.cmd_vel_publisher = self.create_publisher(Twist, '/diff_cont/cmd_vel_unstamped', 10)
 
         self.current_pose = None
         self.desired_pose = None
@@ -25,7 +25,7 @@ class SimplePlanner(Node):
         self.angular_gain = 2.0  # Set angular gain here
 
     def desired_pose_callback(self, msg):
-        self.desired_pose = msg
+        self.desired_pose = msg.pose.pose
 
     def odom_callback(self, msg):
         self.current_pose = msg.pose.pose
@@ -36,8 +36,8 @@ class SimplePlanner(Node):
             return
 
         # Compute errors
-        dx = self.desired_pose.pose.position.x - self.current_pose.position.x
-        dy = self.desired_pose.pose.position.y - self.current_pose.position.y
+        dx = self.desired_pose.position.x - self.current_pose.position.x
+        dy = self.desired_pose.position.y - self.current_pose.position.y
 
         # Compute Euclidean distance and angle difference
         distance = math.sqrt(dx**2 + dy**2)
@@ -75,3 +75,4 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
