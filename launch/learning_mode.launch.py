@@ -27,7 +27,7 @@ def generate_launch_description():
         
         # Launch the recording node for pose data
         Node(
-            package='learning_mode',
+            package='teaching_nav',
             executable='recorder_node',
             name='recorder_node',
             output='screen',
